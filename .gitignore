@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 第三方二进制：syncthing 官方发行包（~34MB）。
+# 不建议入库——体积大、且属第三方产物。安装时按 references/ 走官方下载 / 本机已有包。
+# 如需连同发布，改用 Git LFS：git lfs track "vendor/*.zip"
+vendor/*.zip
+
+# 本机 / 临时产物
+*.tmp
+.tmp_*
+*.bak-*
+.DS_Store
+Thumbs.db

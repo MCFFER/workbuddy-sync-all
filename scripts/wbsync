@@ -1,0 +1,18 @@
+#!/bin/zsh
+# wbsync 全局入口包装（Mac / Linux：A 机、C 机）
+# 让 `wbsync` 在任意目录可用；python 路径不写死，跨机（A/C 用户名不同）也能跑。
+# 真实脚本与本包装同目录：<本文件所在目录>/wbsync.py
+SCRIPT_DIR="${0:A:h}"
+
+# 1) 优先用 PATH 里的 python3（WorkBuddy 自带或系统均可）
+if command -v python3 >/dev/null 2>&1; then
+  exec python3 "${SCRIPT_DIR}/wbsync.py" "$@"
+fi
+
+# 2) 否则扫描 WorkBuddy 托管的 python（任意机器、任意版本都适用）
+for p in ~/.workbuddy/binaries/python/versions/*/bin/python3(N); do
+  [ -x "$p" ] && exec "$p" "${SCRIPT_DIR}/wbsync.py" "$@"
+done
+
+echo "找不到 python3，无法运行 wbsync" >&2
+exit 1
