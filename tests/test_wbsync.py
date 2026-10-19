@@ -3097,7 +3097,7 @@ _s39 = _capture(lambda: W.cmd_secure(_A39()))
 check("39.1 secure status 输出含「同步夹」", "同步夹" in _s39, _s39[:80])
 check("39.2 各夹给出加固结论",
       ("就绪" in _s39) or ("无 .stignore" in _s39) or ("缺 wbsync-secure 规则" in _s39), _s39[:120])
-# 2026-10-18 用户拍板「全量镜像」：.stignore 只排系统垃圾，密钥/大件/冲突规则全部撤销
+# 2026-10-18 维护者决定「全量镜像」：.stignore 只排系统垃圾，密钥/大件/冲突规则全部撤销
 # →「有 .stignore 但缺 wbsync-secure 规则」是**预期状态**，不是故障；别再把它当失败。
 
 

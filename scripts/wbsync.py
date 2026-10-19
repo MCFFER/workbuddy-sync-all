@@ -90,7 +90,7 @@ def _wb_install_roots():
 
     为什么要有这个（R-20261017-B-board-push-win，B 实测）：原来两处各自硬编码 mac 路径，
     Windows 只兜 `LOCALAPPDATA` 的两个标准位置。B 把 WorkBuddy 装在**非系统盘**
-    （`E:/workbuddy`）→ 两个候选都不存在 → `board push` 报
+    （`<install-dir>`）→ 两个候选都不存在 → `board push` 报
     「can't open file 'C:\\Applications\\WorkBuddy.app\\...'」（mac 路径被当相对路径拼到 C: 盘）。
 
     统一规则：**env → 各平台默认 → 各盘符根扫描**，找不到再退回首选（让报错路径可读）。
@@ -12883,7 +12883,7 @@ def cmd_lock(args):
 # 与「同机编辑锁」(lock) 的区别：lock 是本机本地、防同机多对话；reserve 写进 coop/shared
 # （随 Syncthing 同步到三机），防 A/B/C 不同机器**同时改同一份文件**。任何文件类型通用
 # （媒体 / 文档 / 代码 / 工程），同一时刻只允许一个持有者，靠心跳 + TTL 防卡死。
-# 2026-10-18 用户拍板 60 → 30（#19）：机器会随手关，长 TTL 会把文件锁死太久；
+# 2026-10-18 维护者决定 60 → 30（#19）：机器会随手关，长 TTL 会把文件锁死太久；
 # 30 分钟 ≈ 6 个心跳周期，够容忍准实时同步延迟，关机后最多半小时自动回池。
 RESERVE_DEFAULT_TTL_MIN = 30
 
